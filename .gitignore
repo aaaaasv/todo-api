@@ -1,0 +1,10 @@
+.idea/
+
+*.log
+*.pyc
+*.db
+__pycache__/
+*.sqlite3
+*.sqlite
+
+venv/
