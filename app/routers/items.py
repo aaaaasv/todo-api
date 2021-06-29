@@ -46,7 +46,7 @@ def update_item(item_id: int, item_update: schemas_item.ItemUpdate, db: Session 
 
 
 @router.delete('/{item_id}', response_model=schemas_item.Item)
-def update_item(item_id: int, db: Session = Depends(get_db),
+def delete_item(item_id: int, db: Session = Depends(get_db),
                 current_user: schemas_user.User = Depends(get_current_user)):
     db_item = crud_item.item.get(db, item_id=item_id)
     if not db_item:

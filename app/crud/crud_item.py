@@ -29,7 +29,7 @@ class CRUDItem:
         db.refresh(db_item)
         return db_item
 
-    def delete(self, db: Session, item: schemas_item.Item):
+    def delete(self, db: Session, item):
         db.delete(item)
         db.commit()
         return item
