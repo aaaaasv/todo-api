@@ -3,18 +3,19 @@ version: "3.8"
 services:
   web:
     build: .
-    command: uvicorn app.main:app --reload --host 0.0.0.0
+    command: bash -c "alembic -c app/alembic.ini upgrade head && uvicorn app.main:app --reload --host 0.0.0.0"
     ports:
       - 8000:8000
     volumes:
       - ./:/usr/src/app/
-    depends_on:
-      - pgdb
     environment:
       - SQL_USER=postgres
       - SQL_PASSWORD=password
       - SQL_DATABASE=postgres
       - SQL_HOST=pgdb
+    depends_on:
+      - pgdb
+    restart: on-failure
   pgdb:
     image: postgres
     environment:
