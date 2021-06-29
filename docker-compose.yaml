@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    command: uvicorn app.main:app --reload --host 0.0.0.0
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/app/
+    depends_on:
+      - pgdb
+    environment:
+      - SQL_USER=postgres
+      - SQL_PASSWORD=password
+      - SQL_DATABASE=postgres
+      - SQL_HOST=pgdb
+  pgdb:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+volumes:
+  pgdata:
