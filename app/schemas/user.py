@@ -9,7 +9,7 @@ class UserCreate(UserBase):
     password: str
 
 
-class User(UserCreate):
+class User(UserBase):
     id: int
 
     class Config:
